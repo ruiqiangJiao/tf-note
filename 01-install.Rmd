@@ -1,0 +1,137 @@
+# 安装 {#install}
+
+## 安装系统
+
+**TensorFlow**  目前支持比较完善的是 __Linux__ 和 __Mac__ (对 Windows 支持不够全面), 而 __Mac__ 系统主要使用 __CPU__  (Mac 很少使用显卡, 而目前 TensorFlow 对 CUDA 支持比较好) , 因此在学习过程中安装过程基于 Linux 系统。
+
+- 系统
+
+```
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.4 LTS
+Release:	    16.04
+Codename:	    xenial
+```
+
+## 安装步骤
+
+- 安装 **Anconda**
+
+    -  从[Anconda官网](https://www.anaconda.com/download/)下载 Anaconda , 这里下载的 Anaconda3-5.1.0-Linux-x86_64.sh ;
+    
+    -  在下载目录下执行下面的命令 
+    
+        ```
+        bash Anaconda3-5.1.0-Linux-x86_64.sh
+        ```
+
+- 安装 TensorFlow CPU 版本
+
+    - 下载安装包,下载路径 <https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl>
+    
+        ```{block2, type='rmdwarning'}
+        下载之后，将whl文件重命名为tensorflow-1.0.0-py3-none-linux_x86_64.whl，否则会出现
+        
+        `
+        tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl is not a supported wheel on this platform.
+        `
+        ```
+    
+    - 创建环境,执行命令 
+    
+        ```
+        conda create -n tensorflow python=3.6
+        ```
+        
+    - 进入环境并安装tensorflow
+    
+        ```
+        source activate tensorflow       #激活tensorflow环境
+        cd /Downloads                    #切换到whl文件所在文件夹
+        pip install --ignore-installed --upgrade tensorflow-1.0.0-py3-none-linux_x86_64.whl
+        ```
+        
+- 安装 TensorFlow GPU 版本
+
+    - 下载 **CUDA** , 下载路径<https://developer.nvidia.com/cuda-toolkit-archive>
+    
+    - 进入下载目录, 安装CUDA , 安装命令
+    
+        ```
+        sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+        sudo apt-get update
+        sudo apt-get install cuda
+        ```
+    - 安装完成后, 配置环境变量, 在home下的.bashrc中加入
+    
+        ```
+        export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+        export CUDA_HOME=/usr/local/cuda:$CUDA_HOME
+        ```
+      
+        执行 ```source .bashrc```
+        
+    - 下载 **cuDNN** , 下载路径<https://developer.nvidia.com/rdp/cudnn-download>
+    
+    - 进入下载目录,执行下列命令
+    
+        ```
+        tar xvzf cudnn-8.0-linux-x64-v5.1.tgz 
+        sudo cp cuda/include/cudnn.h /usr/local/cuda/include 
+        sudo cp cuda/lib64/libcudnn.so* /usr/local/cuda/lib64 
+        sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn.so*
+        ```
+        
+    - 下载安装包TensorFlow(GPU),下载路径<https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.0.0-cp36-cp36m-linux_x86_64.whl>
+    
+    - 创建环境,执行命令
+    
+      ```
+      conda create -n tensorflow-gpu python=3.6 
+      ```
+    
+    - 进入环境并安装tensorflow
+    
+        ```
+        source activate tensorflow-gpu
+        cd /Downloads
+        pip install --ignore-installed --upgrade tensorflow_gpu-1.0.0-cp36-cp36m-linux_x86_64.whl
+        ```
+        
+    ```{block2, type='rmdnote'}
+    目前pthon 只支持8.0版本GPU的TensorFlow,因此,下载对应的CUDA和cuDNN较好.
+    
+    ```
+    
+
+- 验证
+
+    ```
+    source activate tensorflow-gpu
+    (tensorflow-gpu)$ python
+    import tensorflow as tf
+    hello = tf.constant('Hello, TensorFlow!')
+    sess = tf.Session()
+    sess.run(hello)
+    ```
+
+因个人比较喜欢 **jupyter notebook** , 进行jupyter文件,开启TensorFlow
+
+```
+cd jupyter
+jupyter-notebook --ip 0.0.0.0
+```
+    
+  浏览器登录<http://host:8888/notebooks>
+  
+## 参考资料
+
+  - 参考资料  <https://blog.csdn.net/michaelliang12/article/details/60106686>
+
+
+
+
+
+
+
+

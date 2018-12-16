@@ -1,0 +1,15 @@
+book_filename: docs
+clean: [packages.bib, bookdown.bbl]
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+    thm: "定理 "
+    lem: "引理 "
+    def: "定义 "
+    cor: "推论 "
+    prp: "性质 "
+    exm: "例 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]

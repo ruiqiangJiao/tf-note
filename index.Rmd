@@ -1,0 +1,15 @@
+--- 
+title: "深度学习与 TensorFlow 笔记"
+documentclass: ctexbook
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+github-repo: ruiqiangjiao/tf-note
+---
+
+# TensorFlow 简介
+
